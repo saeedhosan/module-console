@@ -1,0 +1,67 @@
+{
+    "name": "saeedhosan/module-console",
+    "version": "dev-main",
+    "description": "The package provides console and commands for Laravel module.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "module",
+        "console",
+        "laravel-module",
+        "module-console",
+        "saeedhosan"
+    ],
+    "require": {
+        "php": "^8.2.0",
+        "laravel/framework": "^11.0 || ^12.0 || ^13.0",
+        "saeedhosan/module-support": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "SaeedHosan\\Module\\Console\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Saeed",
+            "email": "saeedhosansh@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "laravel/pint": "^1.25",
+        "pestphp/pest": "^3.8",
+        "phpstan/phpstan": "^2.1",
+        "orchestra/testbench": "^10.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SaeedHosan\\Module\\Console\\ServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "lint": "pint -v",
+        "test:lint": "pint --test -v",
+        "test:types": "phpstan analyse --ansi",
+        "test:unit": "pest --colors=always",
+        "test": [
+            "@test:lint",
+            "@test:types",
+            "@test:unit"
+        ]
+    }
+}

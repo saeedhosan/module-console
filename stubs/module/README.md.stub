@@ -1,0 +1,74 @@
+# {{ title }} module
+
+## Introduction
+
+The `{{ name }}` module adds a dedicated feature area to the main Laravel application.
+
+It helps organize related routes, configuration, migrations, views, translations, tests, and service logic in a single place.
+
+Use this module when you want to keep a specific feature isolated and maintainable.
+
+---
+
+## Requirements
+
+Before installing this module, make sure the main application provides:
+
+- A working Laravel application
+- A configured application structure
+- Database access for running migrations
+- Any shared models, services, or helpers required by the module
+
+---
+
+## Installation
+
+Install the module using Composer:
+
+```bash
+composer require {{ package }}
+```
+
+Run the database migrations:
+
+```bash
+php artisan migrate
+```
+
+---
+
+## Module Information
+
+- **Name:** `{{ name }}`
+- **Title:** `{{ title }}`
+- **Version:** `{{ version }}`
+- **Package:** `{{ package }}`
+- **Namespace:** `{{ namespace }}`
+
+---
+
+## Features
+
+This module provides reusable components and services that can be used across the application.
+
+### Components
+
+List the components provided by this module.
+
+### Services
+
+List the services provided by this module.
+
+### Routes
+
+List the routes exposed by this module.
+
+---
+
+## Testing
+
+Run the module test suite:
+
+```bash
+php artisan test --compact modules/{{ slug }}/tests
+```

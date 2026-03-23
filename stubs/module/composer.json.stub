@@ -1,0 +1,23 @@
+{
+    "name": "{{ package }}",
+    "description": "The {{ name }} module handle for specific.",
+    "type": "library",
+    "version": "1.0",
+    "license": "proprietary",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "{{ rootNamespace }}\\": "app/",
+            "{{ rootNamespace }}\\Tests\\": "tests/",
+            "{{ rootNamespace }}\\Database\\": "database/"
+        }
+    },
+    "minimum-stability": "stable",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "{{ rootNamespace }}\\ServiceProvider"
+            ]
+        }
+    }
+}

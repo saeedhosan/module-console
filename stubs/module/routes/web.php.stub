@@ -1,0 +1,7 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Here is where you can register web routes for this module.
+ */
