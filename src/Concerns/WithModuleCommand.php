@@ -81,7 +81,7 @@ trait WithModuleCommand
         return $this->getModule()->basePath('tests', $this->testClassFullyQualifiedName().'test.php');
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
 
