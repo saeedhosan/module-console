@@ -27,8 +27,8 @@ class ServiceProvider extends BaseServiceProvider
     public function boot(): void
     {
         $this->publishStubs();
-        $this->withCommands();
-        $this->withAbout();
+        $this->registerCommands();
+        $this->registerAbout();
     }
 
     private function publishStubs(): void
@@ -42,7 +42,7 @@ class ServiceProvider extends BaseServiceProvider
         ], 'module-stubs');
     }
 
-    private function withCommands(): void
+    private function registerCommands(): void
     {
         if (! $this->app->runningInConsole()) {
             return;
@@ -53,7 +53,42 @@ class ServiceProvider extends BaseServiceProvider
             ModuleListCommand::class,
         ]);
 
-        $commands = [
+        foreach ($this->availableMakeCommands() as $command) {
+            $this->app->extend($command, function ($instance, $app) use ($command) {
+                return $app->make($this->moduleCommandClass($command));
+            });
+        }
+    }
+
+    private function moduleCommandClass(string $command): string
+    {
+        $baseClass = '\\'.mb_ltrim($command, '\\');
+        $alias     = 'Module_'.str_replace('\\', '_', $command);
+
+        if (! class_exists($alias)) {
+            $trait      = '\\'.mb_ltrim(WithModuleCommand::class, '\\');
+            $definition = 'class '.$alias.' extends '.$baseClass.' { use '.$trait.'; }';
+
+            eval($definition);
+        }
+
+        return $alias;
+    }
+
+    private function registerAbout(): void
+    {
+        if (! class_exists(InstalledVersions::class) || ! class_exists(AboutCommand::class)) {
+            return;
+        }
+
+        AboutCommand::add('Module', static fn () => [
+            'Console version' => InstalledVersions::getPrettyVersion('saeedhosan/module-console'),
+        ]);
+    }
+
+    private function availableMakeCommands(): array
+    {
+        return array_filter([
             \Illuminate\Foundation\Console\CastMakeCommand::class,
             \Illuminate\Foundation\Console\ChannelMakeCommand::class,
             \Illuminate\Foundation\Console\ClassMakeCommand::class,
@@ -86,43 +121,9 @@ class ServiceProvider extends BaseServiceProvider
             \Illuminate\Database\Console\Migrations\MigrateMakeCommand::class,
             \Illuminate\Database\Console\Seeds\SeederMakeCommand::class,
 
-            // packages
-            \Laravel\Ai\Console\Commands\MakeAgentCommand::class,
-            \Spatie\LaravelData\Commands\DataMakeCommand::class,
-        ];
-
-        foreach ($commands as $command) {
-            if (class_exists($command)) {
-                $this->app->extend($command, function ($instance, $app) use ($command) {
-                    return $app->make($this->moduleCommandClass($command));
-                });
-            }
-        }
-    }
-
-    private function moduleCommandClass(string $command): string
-    {
-        $baseClass = '\\'.mb_ltrim($command, '\\');
-        $alias     = 'Module_'.str_replace('\\', '_', $command);
-
-        if (! class_exists($alias)) {
-            $trait      = '\\'.mb_ltrim(WithModuleCommand::class, '\\');
-            $definition = 'class '.$alias.' extends '.$baseClass.' { use '.$trait.'; }';
-
-            eval($definition);
-        }
-
-        return $alias;
-    }
-
-    private function withAbout(): void
-    {
-        if (! class_exists(InstalledVersions::class) || ! class_exists(AboutCommand::class)) {
-            return;
-        }
-
-        AboutCommand::add('Module', static fn () => [
-            'Console version' => InstalledVersions::getPrettyVersion('saeedhosan/module-console'),
-        ]);
+            // extend packages (no PHPStan error)
+            'Laravel\Ai\Console\Commands\MakeAgentCommand',
+            'Spatie\LaravelData\Commands\DataMakeCommand',
+        ], 'class_exists');
     }
 }
