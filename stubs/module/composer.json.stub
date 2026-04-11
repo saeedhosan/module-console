@@ -17,7 +17,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "{{ rootNamespace }}\\ServiceProvider"
+                "{{ rootNamespace }}\\{{ title }}ServiceProvider"
             ]
         }
     }
