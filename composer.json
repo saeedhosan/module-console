@@ -1,6 +1,5 @@
 {
     "name": "saeedhosan/module-console",
-    "version": "dev-main",
     "description": "The package provides console and commands for Laravel module.",
     "type": "library",
     "license": "MIT",
@@ -15,7 +14,7 @@
     "require": {
         "php": "^8.2.0",
         "laravel/framework": "^11.0 || ^12.0 || ^13.0",
-        "saeedhosan/module-support": "dev-main"
+        "saeedhosan/module-support": "^0.0"
     },
     "autoload": {
         "psr-4": {
