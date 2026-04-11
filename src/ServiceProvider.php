@@ -44,6 +44,10 @@ class ServiceProvider extends BaseServiceProvider
 
     private function withCommands(): void
     {
+        if (! $this->app->runningInConsole()) {
+            return;
+        }
+
         $this->commands([
             GenerateModuleSkeleton::class,
             ModuleListCommand::class,
@@ -81,20 +85,18 @@ class ServiceProvider extends BaseServiceProvider
             \Illuminate\Database\Console\Factories\FactoryMakeCommand::class,
             \Illuminate\Database\Console\Migrations\MigrateMakeCommand::class,
             \Illuminate\Database\Console\Seeds\SeederMakeCommand::class,
+
+            // packages
+            \Laravel\Ai\Console\Commands\MakeAgentCommand::class,
+            \Spatie\LaravelData\Commands\DataMakeCommand::class,
         ];
 
-        if (class_exists($class = \Laravel\Ai\Console\Commands\MakeAgentCommand::class)) {
-            $commands[] = $class;
-        }
-
-        if (class_exists($class = \Spatie\LaravelData\Commands\DataMakeCommand::class)) {
-            $commands[] = $class;
-        }
-
         foreach ($commands as $command) {
-            $this->app->extend($command, function ($instance, $app) use ($command) {
-                return $app->make($this->moduleCommandClass($command));
-            });
+            if (class_exists($command)) {
+                $this->app->extend($command, function ($instance, $app) use ($command) {
+                    return $app->make($this->moduleCommandClass($command));
+                });
+            }
         }
     }
 
