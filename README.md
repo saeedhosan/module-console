@@ -137,7 +137,7 @@ php artisan make:controller PostController --module=blog
 php artisan make:migration create_posts_table --module=blog
 ```
 
-The package support almost all make:* commands to create somthing inside module
+This package supports almost all `make:*` commands to create something inside a module.
 
 ```bash
 php artisan make:YourMakeCommand YourClassName --module=ModuleName
