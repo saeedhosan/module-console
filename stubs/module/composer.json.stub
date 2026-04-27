@@ -9,8 +9,8 @@
         "psr-4": {
             "{{ rootNamespace }}\\": "app/",
             "{{ rootNamespace }}\\Tests\\": "tests/",
-            "{{ rootNamespace }}\\Database\\Factories": "database/factories",
-            "{{ rootNamespace }}\\Database\\Seeders": "database/seeders"
+            "{{ rootNamespace }}\\Database\\Seeders\\": "database/seeders",
+            "{{ rootNamespace }}\\Database\\Factories\\": "database/factories"
         }
     },
     "minimum-stability": "stable",
