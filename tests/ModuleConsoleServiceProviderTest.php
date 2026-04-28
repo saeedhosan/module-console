@@ -3,14 +3,14 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Artisan;
-use SaeedHosan\Module\Console\ServiceProvider;
+use SaeedHosan\Module\Console\ModuleConsoleServiceProvider;
 use Tests\TestCase;
 
 uses(TestCase::class);
 
 it('registers migration creator alias', function () {
     $app      = app();
-    $provider = new ServiceProvider($app);
+    $provider = new ModuleConsoleServiceProvider($app);
     $provider->register();
 
     expect($app->bound('migration.creator'))->toBeTrue();
@@ -18,7 +18,7 @@ it('registers migration creator alias', function () {
 
 it('publishes stubs when running in console', function () {
     $app      = app();
-    $provider = new ServiceProvider($app);
+    $provider = new ModuleConsoleServiceProvider($app);
     $provider->boot();
 
     $publishes = (new ReflectionClass($provider))->getProperty('publishes');
@@ -28,10 +28,10 @@ it('publishes stubs when running in console', function () {
 
 it('registers generate module skeleton command', function () {
     $app      = app();
-    $provider = new ServiceProvider($app);
+    $provider = new ModuleConsoleServiceProvider($app);
     $provider->boot();
 
-    expect($provider)->toBeInstanceOf(ServiceProvider::class);
+    expect($provider)->toBeInstanceOf(ModuleConsoleServiceProvider::class);
 });
 
 it('registers module list command', function () {
@@ -43,7 +43,7 @@ it('registers module list command', function () {
 });
 
 test('returns available make commands', function () {
-    $reflection = new ReflectionClass(ServiceProvider::class);
+    $reflection = new ReflectionClass(ModuleConsoleServiceProvider::class);
     $method     = $reflection->getMethod('availableMakeCommands');
 
     $result = $method->invoke(new ServiceProvider(app()));
@@ -54,7 +54,7 @@ test('returns available make commands', function () {
 });
 
 test('overrides make commands using WithModuleCommand', function () {
-    $reflection = new ReflectionClass(ServiceProvider::class);
+    $reflection = new ReflectionClass(ModuleConsoleServiceProvider::class);
     $method     = $reflection->getMethod('moduleCommandClass');
 
     $provider = new ServiceProvider(app());

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
-use SaeedHosan\Module\Console\ServiceProvider;
+use SaeedHosan\Module\Console\ModuleConsoleServiceProvider;
 use SaeedHosan\Module\Support\ServiceProvider as ModuleSupportServiceProvider;
 
 abstract class TestCase extends Orchestra
@@ -14,7 +14,7 @@ abstract class TestCase extends Orchestra
     {
         return [
             ModuleSupportServiceProvider::class,
-            ServiceProvider::class,
+            ModuleConsoleServiceProvider::class,
         ];
     }
 
