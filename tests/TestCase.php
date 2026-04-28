@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
-use SaeedHosan\Module\Console\ModuleConsoleServiceProvider;
+use SaeedHosan\Module\Console\ServiceProvider;
 use SaeedHosan\Module\Support\ServiceProvider as ModuleSupportServiceProvider;
 
 abstract class TestCase extends Orchestra
@@ -13,8 +13,8 @@ abstract class TestCase extends Orchestra
     protected function getPackageProviders($app): array
     {
         return [
-            ModuleConsoleServiceProvider::class,
             ModuleSupportServiceProvider::class,
+            ServiceProvider::class,
         ];
     }
 

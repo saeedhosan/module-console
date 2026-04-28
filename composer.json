@@ -48,7 +48,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "SaeedHosan\\Module\\Console\\ModuleConsoleServiceProvider"
+                "SaeedHosan\\Module\\Console\\ServiceProvider"
             ]
         }
     },

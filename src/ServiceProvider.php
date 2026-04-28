@@ -11,7 +11,7 @@ use SaeedHosan\Module\Console\Commands\GenerateModuleSkeleton;
 use SaeedHosan\Module\Console\Commands\ModuleListCommand;
 use SaeedHosan\Module\Console\Concerns\WithModuleCommand;
 
-class ModuleConsoleServiceProvider extends BaseServiceProvider
+class ServiceProvider extends BaseServiceProvider
 {
     /**
      * Register services.
