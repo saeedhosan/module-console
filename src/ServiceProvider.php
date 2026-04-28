@@ -123,6 +123,13 @@ class ServiceProvider extends BaseServiceProvider
 
             // extend packages (no PHPStan error)
             'Laravel\Ai\Console\Commands\MakeAgentCommand',
+            'Laravel\Ai\Console\Commands\MakeToolCommand',
+            'Laravel\Ai\Console\Commands\MakeAgentMiddlewareCommand',
+            'Laravel\Mcp\Console\Commands\MakeServerCommand',
+            'Laravel\Mcp\Console\Commands\MakeToolCommand',
+            'Laravel\Mcp\Console\Commands\MakePromptCommand',
+            'Laravel\Mcp\Console\Commands\MakeResourceCommand',
+            'Laravel\Mcp\Console\Commands\MakeAppResourceCommand',
             'Spatie\LaravelData\Commands\DataMakeCommand',
         ], 'class_exists');
     }
