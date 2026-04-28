@@ -122,7 +122,7 @@ class ModuleConsoleServiceProvider extends BaseServiceProvider
             \Illuminate\Database\Console\Seeds\SeederMakeCommand::class,
 
             // extend packages (no PHPStan error)
-            'Laravel\Ai\Console\Commands\MakeAgentCommand',
+            'Laravel\Ai\Console\Commands\MakeAgentCommand', 'Laravel\Ai\Console\Commands\MakeToolCommand',    'Laravel\Ai\Console\Commands\MakeAgentMiddlewareCommand',
             'Spatie\LaravelData\Commands\DataMakeCommand',
         ], 'class_exists');
     }
