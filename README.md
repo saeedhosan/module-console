@@ -27,7 +27,7 @@ composer require saeedhosan/module-console
 
 ## Suggestions
 
-After creating a module, you need to load it into your application. Here are two ways to do it:
+After creating a module, you need to load it into your application. Here are **two ways** to do it:
 
 **1. Use Composer path repositories (recommended)**
 
