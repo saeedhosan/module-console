@@ -113,3 +113,7 @@ it('overrides make commands should have module option', function () {
         }
     }
 });
+
+it('throws exception when using --module with non-existent module', function () {
+    Artisan::call('make:cast', ['name' => 'SomeCast', '--module' => 'non-existent-module']);
+})->throws(InvalidArgumentException::class, 'Module [non-existent-module] does not exist.');

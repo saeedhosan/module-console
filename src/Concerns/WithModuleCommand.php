@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace SaeedHosan\Module\Console\Concerns;
 
 use Illuminate\Support\Str;
+use InvalidArgumentException;
 use SaeedHosan\Module\Support\Module;
 use SaeedHosan\Module\Support\ModuleManager;
 use Symfony\Component\Console\Input\InputOption;
@@ -16,7 +17,13 @@ trait WithModuleCommand
      */
     public function getModule(): Module
     {
-        return app(ModuleManager::class)->module($this->option('module') ?? '');
+        $name = $this->option('module') ?? '';
+
+        if ($name && ! app(ModuleManager::class)->module($name)->exists()) {
+            throw new InvalidArgumentException(sprintf('Module [%s] does not exist.', $name));
+        }
+
+        return app(ModuleManager::class)->module($name);
     }
 
     /**
