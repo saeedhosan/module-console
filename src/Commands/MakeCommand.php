@@ -6,7 +6,7 @@ namespace SaeedHosan\Module\Console\Commands;
 
 use SaeedHosan\Module\Console\Concerns\WithLivewireModuleCommand;
 
-class LivewireMakeCommand extends \Livewire\Features\SupportConsoleCommands\Commands\LivewireMakeCommand
+class MakeCommand extends \Livewire\Features\SupportConsoleCommands\Commands\MakeCommand
 {
     use WithLivewireModuleCommand;
 }

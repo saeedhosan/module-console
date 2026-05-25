@@ -135,6 +135,8 @@ php artisan make:model Post --module=blog
 php artisan make:enum PostStatus --module=blog
 php artisan make:controller PostController --module=blog
 php artisan make:migration create_posts_table --module=blog
+php artisan make:livewire PostTable --module=blog
+php artisan livewire:make PostTable --module=blog
 ```
 
 This package supports almost all `make:*` commands to create something inside a module.

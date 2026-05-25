@@ -39,9 +39,12 @@ namespace Livewire\Features\SupportConsoleCommands\Commands;
 use Illuminate\Console\Command;
 use Livewire\Finder\Finder;
 
-class LivewireMakeCommand extends Command
+abstract class BaseLivewireMakeCommand extends Command
 {
-    protected $name = 'livewire:make';
+    /**
+     * @var array<int, array<string, mixed>>
+     */
+    public static array $observations = [];
 
     protected Finder $finder;
 
@@ -49,11 +52,32 @@ class LivewireMakeCommand extends Command
     {
         parent::__construct();
 
-        $this->finder = app('livewire.finder');
+        $this->finder = app()->bound('livewire.finder') ? app('livewire.finder') : new Finder();
     }
 
     public function handle()
     {
+        self::$observations[] = [
+            'class' => static::class,
+            'module' => $this->option('module'),
+            'livewire.class_namespace' => config('livewire.class_namespace'),
+            'livewire.class_path' => config('livewire.class_path'),
+            'livewire.view_path' => config('livewire.view_path'),
+            'livewire.component_locations' => config('livewire.component_locations'),
+            'livewire.component_namespaces' => config('livewire.component_namespaces'),
+            'finder' => app()->bound('livewire.finder') ? app('livewire.finder') : null,
+        ];
+
         return 0;
     }
+}
+
+class MakeCommand extends BaseLivewireMakeCommand
+{
+    protected $signature = 'make:livewire {name}';
+}
+
+class LivewireMakeCommand extends BaseLivewireMakeCommand
+{
+    protected $signature = 'livewire:make {name}';
 }

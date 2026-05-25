@@ -8,6 +8,7 @@ use Composer\InstalledVersions;
 use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use SaeedHosan\Module\Console\Commands\GenerateModuleSkeleton;
+use SaeedHosan\Module\Console\Commands\MakeCommand as LivewireModuleMakeCommand;
 use SaeedHosan\Module\Console\Commands\LivewireMakeCommand;
 use SaeedHosan\Module\Console\Commands\ModuleListCommand;
 use SaeedHosan\Module\Console\Concerns\WithModuleCommand;
@@ -66,16 +67,16 @@ class ModuleConsoleServiceProvider extends BaseServiceProvider
     private function registerLivewireCommands(): void
     {
         $livewireCommands = [
-            'Livewire\Features\SupportConsoleCommands\Commands\MakeCommand',
-            'Livewire\Features\SupportConsoleCommands\Commands\LivewireMakeCommand',
+            'Livewire\Features\SupportConsoleCommands\Commands\MakeCommand' => LivewireModuleMakeCommand::class,
+            'Livewire\Features\SupportConsoleCommands\Commands\LivewireMakeCommand' => LivewireMakeCommand::class,
         ];
 
-        foreach ($livewireCommands as $command) {
+        foreach ($livewireCommands as $command => $moduleCommand) {
             if (! class_exists($command)) {
                 continue;
             }
 
-            $this->app->extend($command, fn ($instance, $app) => $app->make(LivewireMakeCommand::class));
+            $this->app->extend($command, fn ($instance, $app) => $app->make($moduleCommand));
         }
     }
 
