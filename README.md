@@ -26,9 +26,9 @@ composer require saeedhosan/module-console --dev
 
 ## Suggestions
 
-After creating a module, you need to load it into your application. Here are **two ways** to do it:
+After creating a module, you need to load it into your application. Here are **two ways** (A, B) to do it:
 
-**1. Use Composer path repositories (recommended)**
+**A. Use Composer path repositories (recommended)**
 
 Add this to your root `composer.json` so Composer treats every module as a local package:
 
@@ -52,7 +52,7 @@ composer require modules/blog
 
 Composer will symlink it and auto-discover the service provider — no manual registration needed.
 
-**2. Add the module namespace manually**
+**B. Add the module namespace manually**
 
 Register the module's namespace in your `composer.json`:
 
