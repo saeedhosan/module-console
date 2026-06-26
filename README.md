@@ -15,14 +15,13 @@ Here are a few popular packages:
 
 - PHP 8.2+
 - Laravel 11, 12, or 13
-- [saeedhosan/module-support](https://github.com/saeedhosan/module-support)
 
 ## Installation
 
 Install via Composer:
 
 ```bash
-composer require saeedhosan/module-console
+composer require saeedhosan/module-console --dev
 ```
 
 ## Suggestions
