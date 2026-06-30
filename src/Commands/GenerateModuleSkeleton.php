@@ -9,6 +9,7 @@ use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use InvalidArgumentException;
 use RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -29,7 +30,7 @@ class GenerateModuleSkeleton extends Command implements PromptsForMissingInput
     /**
      * Execute the console command.
      */
-    public function handle(): ?bool
+    public function handle(): bool|null
     {
 
         $name = $this->getNameInput();
@@ -72,6 +73,13 @@ class GenerateModuleSkeleton extends Command implements PromptsForMissingInput
     public function getNameInput(): string
     {
         $name = mb_trim($this->argument('name'));
+
+        if (! preg_match('/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/', $name)) {
+            throw new InvalidArgumentException(sprintf(
+                'Module name [%s] is invalid. Module names may only contain letters, numbers, and underscores, and must start with a letter or underscore.',
+                $name
+            ));
+        }
 
         if (config('module.lowercase')) {
             return Str::lower($name);

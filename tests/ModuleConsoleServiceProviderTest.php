@@ -61,7 +61,7 @@ test('overrides make commands using WithModuleCommand', function () {
     $result   = $method->invoke($provider, Illuminate\Foundation\Console\CastMakeCommand::class);
 
     expect($result)->toBeString();
-    expect($result)->toStartWith('Module_');
+    expect($result)->toStartWith('SaeedHosan_Module_Console_Generated_');
     expect(class_exists($result))->toBeTrue();
 
     $traits = class_uses($result);
