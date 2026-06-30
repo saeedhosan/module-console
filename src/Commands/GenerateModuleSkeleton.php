@@ -28,10 +28,8 @@ class GenerateModuleSkeleton extends Command implements PromptsForMissingInput
 
     /**
      * Execute the console command.
-     *
-     * @return bool|null
      */
-    public function handle()
+    public function handle(): bool|null
     {
 
         $name = $this->getNameInput();
@@ -71,7 +69,7 @@ class GenerateModuleSkeleton extends Command implements PromptsForMissingInput
     /**
      * Get the desired class name from the input.
      */
-    public function getNameInput()
+    public function getNameInput(): string
     {
         $name = mb_trim($this->argument('name'));
 
@@ -92,7 +90,7 @@ class GenerateModuleSkeleton extends Command implements PromptsForMissingInput
         return mb_strtolower($this->getVendor().'/'.$this->getNameInput());
     }
 
-    protected function getPath()
+    protected function getPath(): string
     {
         $name = $this->getNameInput();
 
@@ -124,7 +122,7 @@ class GenerateModuleSkeleton extends Command implements PromptsForMissingInput
             throw new RuntimeException('Unable to locate the module stub.');
         }
 
-        $files = Arr::map($this->files->allFiles($path, true), function ($file) {
+        $files = Arr::map($this->files->allFiles($path, true), function ($file): array {
 
             $path     = $this->replaceVars($file->getPathname());
             $contents = $this->replaceVars($file->getContents());
