@@ -63,7 +63,7 @@ class ModuleConsoleServiceProvider extends BaseServiceProvider
     private function moduleCommandClass(string $command): string
     {
         $baseClass = '\\'.mb_ltrim($command, '\\');
-        $alias     = 'Module_'.str_replace('\\', '_', $command);
+        $alias     = 'SaeedHosan_Module_Console_Generated_'.str_replace('\\', '_', $command);
 
         if (! class_exists($alias)) {
             $trait      = '\\'.mb_ltrim(WithModuleCommand::class, '\\');
