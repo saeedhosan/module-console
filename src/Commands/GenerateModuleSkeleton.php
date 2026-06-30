@@ -29,7 +29,7 @@ class GenerateModuleSkeleton extends Command implements PromptsForMissingInput
     /**
      * Execute the console command.
      */
-    public function handle(): bool|null
+    public function handle(): ?bool
     {
 
         $name = $this->getNameInput();
