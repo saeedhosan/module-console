@@ -2,5 +2,7 @@ parameters:
     level: 0
     paths:
         - src
+    bootstrapFiles:
+        - phpstan/livewire-stubs.php
     parallel:
         maximumNumberOfProcesses: 1
